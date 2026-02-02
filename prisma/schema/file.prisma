@@ -1,0 +1,10 @@
+model File {
+  id          Int      @id @default(autoincrement())
+  fileType    FileType
+  fileName    String   @db.VarChar(100)
+  adress      String?  @db.VarChar(100)
+  size        Int      @default(0)
+  isShow      Boolean? @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+}

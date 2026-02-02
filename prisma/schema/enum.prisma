@@ -1,0 +1,26 @@
+enum ApiMethod {
+  GET
+  POST
+  PUT
+  PATCH
+  DELETE
+}
+
+enum ApiType {
+  DIRECTORY
+  API
+}
+
+enum MenuType {
+  DIRECTORY
+  MENU
+  FEATURE
+}
+
+enum FileType{
+    IMAGE  //图片
+    VIDEO  //视频\
+    AUDIO  //音频
+    TEXT  //普通文件
+    APPLICATION  //某种二进制文件，包括word pdf excel等
+  }
