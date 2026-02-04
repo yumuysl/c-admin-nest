@@ -50,6 +50,7 @@ const envFilePath = getEnvPath(__dirname)
     ConfigModule.forRoot({
       envFilePath: [envFilePath, '.env'],
       isGlobal: true,
+      cache: true,
       load: [...config],
     }),
     ScheduleModule.forRoot(),

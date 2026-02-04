@@ -37,3 +37,12 @@ export enum API {
   UPDATE = 'system:api:update',
   DELETE = 'system:api:delete',
 }
+
+/**
+ * 文件管理
+ */
+export enum File {
+  CREATE = 'system:file:create',
+  READ = 'system:file:read',
+  DELETE = 'system:file:delete',
+}
