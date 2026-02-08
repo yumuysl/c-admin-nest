@@ -33,6 +33,7 @@ import { NodemailerModule } from '@/modules/nodemailer/nodemailer.module'
 import { PrismaModule } from '@/modules/prisma/prisma.module'
 import { RoleModule } from '@/modules/role/role.module'
 import { UserModule } from '@/modules/user/user.module'
+import { FileModule } from './modules/file/file.module'
 import { createLoggerOptions, defaultLogFormat, getEnvPath } from '@/utils'
 
 import { AppController } from './app.controller'
@@ -164,6 +165,7 @@ const envFilePath = getEnvPath(__dirname)
     RoleModule,
     MenuModule,
     ApiModule,
+    FileModule,
   ],
   controllers: [AppController],
   providers: [

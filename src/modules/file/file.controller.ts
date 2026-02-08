@@ -27,8 +27,9 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger'
-import { File } from '@/constants/permissions'
-import { CacheInvalidate } from '@/decorators'
+import { Permissions } from '@/decorators'
+import { FILE } from '@/constants/permissions'
+import { CacheInvalidate, CacheKey, CacheTTL } from '@/decorators'
 import { CacheInterceptor } from '@/interceptors'
 import { Request } from 'express'
 import { DeleteManyDto } from '@/common/dto'
@@ -39,18 +40,32 @@ import { CreateFileDto } from './dto/create-file-dto'
 @Controller('file')
 @ApiTags('文件管理模板')
 export class FileController {
-  private static readonly CACHE_TLL = 60 * 60 * 1
+  private static readonly CACHE_TTL = 60 * 60 * 1
 
   constructor(private readonly fileService: FileService) {}
 
+  @Get()
+  @Permissions(FILE.READ)
+  @CacheKey('file:all')
+  @CacheTTL(FileController.CACHE_TTL)
+  @UseInterceptors(CacheInterceptor)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '获取文件列表' })
+  @ApiOkResponse({
+    description: '文件列表获取成功',
+  })
+  findMenuTree() {
+    return this.fileService.findAll()
+  }
+
   @Post()
-  @Permissions(File.CREATE)
-  @CacheInvalidate(['menu:tree', 'menu:flat', 'menu:permission'])
+  @Permissions(FILE.CREATE)
+  @CacheInvalidate(['file:all'])
   @UseInterceptors(CacheInterceptor)
   @ApiBearerAuth()
   @ApiOperation({ summary: '上传文件' })
   @ApiOkResponse({
-    description: '创建菜单成功',
+    description: '文件上传成功',
   })
   create(@Body() createFileDto: CreateFileDto) {
     return this.fileService.create(createFileDto)

@@ -4,11 +4,6 @@ import { IsBoolean, IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
 import { i18nValidationMessage } from 'nestjs-i18n'
 
 export class CreateFileDto {
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsNumber()
-  parentId?: number
-
   @ApiProperty()
   @IsNotEmpty({
     message: i18nValidationMessage('validation.notEmpty', {

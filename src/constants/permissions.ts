@@ -41,8 +41,9 @@ export enum API {
 /**
  * 文件管理
  */
-export enum File {
-  CREATE = 'system:file:create',
-  READ = 'system:file:read',
-  DELETE = 'system:file:delete',
+export enum FILE {
+  CREATE = 'case:file:create',
+  READ = 'case:file:read',
+  UPDATE = 'case:file:update',
+  DELETE = 'case:file:delete',
 }

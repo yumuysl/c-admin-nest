@@ -6,6 +6,10 @@ import { CreateFileDto } from './dto/create-file-dto'
 export class FileService {
   constructor(private readonly prisma: PrismaService) {}
 
+  async findAll() {
+    return this.prisma.file.findMany()
+  }
+
   create(CreateFileDto: CreateFileDto) {
     //TODO:调用阿里云接口上传文件，获取返回结果后保存
     return this.prisma.file.create({
