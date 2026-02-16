@@ -1,0 +1,10 @@
+-- CreateTable
+CREATE TABLE "Sysconfig" (
+    "id" SERIAL NOT NULL,
+    "fileUploadMax" INTEGER NOT NULL DEFAULT 3,
+    "ossBucket" VARCHAR(20) NOT NULL,
+    "createAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updateAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Sysconfig_pkey" PRIMARY KEY ("id")
+);

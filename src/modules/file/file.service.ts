@@ -12,9 +12,11 @@ export class FileService {
 
   create(CreateFileDto: CreateFileDto) {
     //TODO:调用阿里云接口上传文件，获取返回结果后保存
-    return this.prisma.file.create({
-      data: CreateFileDto,
-    })
+
+    console.log('调用了create', CreateFileDto)
+    // return this.prisma.file.create({
+    //   data: CreateFileDto,
+    // })
   }
 
   delete(id: number) {

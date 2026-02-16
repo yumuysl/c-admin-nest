@@ -20,13 +20,13 @@ export class CreateFileDto {
   })
   fileName: string
 
-  @ApiProperty({ required: true })
-  @IsNotEmpty({
-    message: i18nValidationMessage('validation.notEmpty', {
-      field: 'adress',
-    }),
-  })
-  adress: string
+  @ApiProperty({ required: false })
+  // @IsNotEmpty({
+  //   message: i18nValidationMessage('validation.notEmpty', {
+  //     field: 'adress',
+  //   }),
+  // })
+  adress?: string
 
   @ApiProperty({ required: false })
   @IsOptional()
@@ -40,4 +40,6 @@ export class CreateFileDto {
   })
   @IsBoolean()
   isShow?: boolean = true
+
+  file?: File
 }

@@ -33,6 +33,8 @@ async function main() {
   await createExceptionMenu()
   // 创建多级菜单数据
   await createMultiMenu()
+  // 创建功能案例数据
+  await createFunCase()
   // 创建系统菜单数据
   await createSystemMenu()
   // 创建关于菜单数据
@@ -197,6 +199,49 @@ async function createMultiMenu() {
   })
 }
 
+async function createFunCase() {
+  // 创建功能案例根菜单
+  const caseRoot = await prisma.menu.create({
+    data: {
+      title: '功能案例',
+      type: MenuType.DIRECTORY,
+      icon: 'icon-park-outline:block-seven',
+      i18nKey: 'menu.case',
+      isShow: true,
+      sort: 5,
+      description: '实现常用通用功能',
+    },
+  })
+
+  // 创建文件管理
+  await prisma.menu.create({
+    data: {
+      parentId: caseRoot.id,
+      title: '文件管理',
+      type: MenuType.MENU,
+      icon: 'icon-park-outline:tv-one',
+      path: '/case/video',
+      i18nKey: 'menu.caseVideo',
+      sort: 1,
+      isShow: true,
+    },
+  })
+
+  //创建视频管理
+  await prisma.menu.create({
+    data: {
+      parentId: caseRoot.id,
+      title: '视频播放',
+      type: MenuType.MENU,
+      icon: 'icon-park-outline:edit-one',
+      path: '/case/file',
+      i18nKey: 'menu.caseFile',
+      sort: 0,
+      isShow: true,
+    },
+  })
+}
+
 async function createSystemMenu() {
   // 创建根菜单：系统设置
   const systemSettings = await prisma.menu.create({
@@ -205,7 +250,7 @@ async function createSystemMenu() {
       type: MenuType.DIRECTORY,
       icon: 'icon-park-outline:config',
       i18nKey: 'menu.system',
-      sort: 5,
+      sort: 6,
       isShow: true,
       description: '系统设置',
     },

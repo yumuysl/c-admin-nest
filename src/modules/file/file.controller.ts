@@ -58,7 +58,7 @@ export class FileController {
     return this.fileService.findAll()
   }
 
-  @Post()
+  @Post('upload')
   @Permissions(FILE.CREATE)
   @CacheInvalidate(['file:all'])
   @UseInterceptors(CacheInterceptor)
@@ -68,6 +68,7 @@ export class FileController {
     description: '文件上传成功',
   })
   create(@Body() createFileDto: CreateFileDto) {
+    console.log(createFileDto)
     return this.fileService.create(createFileDto)
   }
 }

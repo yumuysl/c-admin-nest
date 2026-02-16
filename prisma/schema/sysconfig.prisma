@@ -1,0 +1,7 @@
+model Sysconfig {
+  id                 Int        @id @default(autoincrement())
+  fileUploadMax      Int        @default(3)
+  ossBucket          String     @db.VarChar(20)
+  createAt           DateTime   @default(now())
+  updateAt           DateTime   @default(now())
+}
