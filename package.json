@@ -15,7 +15,7 @@
     "prisma:seed:dev": "dotenv -e .env.development -- prisma db seed",
     "prisma:push:dev": "dotenv -e .env.development -- prisma db push",
     "prisma:pull:dev": "dotenv -e .env.development -- prisma db pull",
-    "start:debug": "nest start --debug --watch",
+    "start:debug": "cross-env NODE_ENV=development nest start --debug --watch",
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "eslint:inspect": "pnpm dlx @eslint/config-inspector@latest",

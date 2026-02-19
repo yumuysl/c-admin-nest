@@ -34,6 +34,7 @@ import { PrismaModule } from '@/modules/prisma/prisma.module'
 import { RoleModule } from '@/modules/role/role.module'
 import { UserModule } from '@/modules/user/user.module'
 import { FileModule } from './modules/file/file.module'
+import { SysconfigModule } from './modules/sysconfig/sysconfig.module'
 import { createLoggerOptions, defaultLogFormat, getEnvPath } from '@/utils'
 
 import { AppController } from './app.controller'
@@ -166,6 +167,7 @@ const envFilePath = getEnvPath(__dirname)
     MenuModule,
     ApiModule,
     FileModule,
+    SysconfigModule,
   ],
   controllers: [AppController],
   providers: [
