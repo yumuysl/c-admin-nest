@@ -4,5 +4,6 @@
   "minLength": "{field}必须至少{min}个字符",
   "maxLength": "{field}必须最多{max}个字符",
   "min": "{field}最小值为{min}",
-  "max": "{field}最大值为{max}"
+  "max": "{field}最大值为{max}",
+  "errorType": "{field}字段要求{type}类型"
 }

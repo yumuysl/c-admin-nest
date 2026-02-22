@@ -1,4 +1,9 @@
-import { ExecutionContext, ForbiddenException, Injectable, UnauthorizedException } from '@nestjs/common'
+import {
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 import { AuthGuard as PassportAuthGuard } from '@nestjs/passport'
 import { Request } from 'express'
@@ -10,17 +15,18 @@ import { IS_PUBLIC_KEY, IS_REFRESH_KEY, PERMISSIONS_KEY } from '@/decorators'
 export class AuthGuard extends PassportAuthGuard('jwt') {
   constructor(
     private reflector: Reflector,
-    private readonly i18n: I18nService,
+    private readonly i18n: I18nService
   ) {
     super()
   }
 
   async canActivate(context: ExecutionContext) {
     // 检查是否是公开接口
-    const isPublic = this.reflector.getAllAndOverride<boolean | undefined>(IS_PUBLIC_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]) ?? false
+    const isPublic =
+      this.reflector.getAllAndOverride<boolean | undefined>(IS_PUBLIC_KEY, [
+        context.getHandler(),
+        context.getClass(),
+      ]) ?? false
 
     if (isPublic) {
       return true
@@ -34,9 +40,14 @@ export class AuthGuard extends PassportAuthGuard('jwt') {
         throw new UnauthorizedException(this.i18n.t('common.tokenExpired'))
       }
 
-      const isRefresh = this.reflector.get<boolean | undefined>(IS_REFRESH_KEY, context.getHandler()) ?? false
+      const isRefresh =
+        this.reflector.get<boolean | undefined>(
+          IS_REFRESH_KEY,
+          context.getHandler()
+        ) ?? false
       const request = context.switchToHttp().getRequest<Request>()
 
+      console.log('打印请求user：', request.user)
       if (!isRefresh && request.user.tokenType !== 'access') {
         throw new UnauthorizedException(this.i18n.t('common.refreshTokenOnly'))
       }
@@ -45,10 +56,11 @@ export class AuthGuard extends PassportAuthGuard('jwt') {
         return true
       }
 
-      const requiredApiPermissions = this.reflector.getAllAndOverride<string[] | undefined>(PERMISSIONS_KEY, [
-        context.getClass(),
-        context.getHandler(),
-      ]) ?? []
+      const requiredApiPermissions =
+        this.reflector.getAllAndOverride<string[] | undefined>(
+          PERMISSIONS_KEY,
+          [context.getClass(), context.getHandler()]
+        ) ?? []
 
       if (requiredApiPermissions.length === 0) {
         return true
@@ -56,15 +68,16 @@ export class AuthGuard extends PassportAuthGuard('jwt') {
 
       const userApiPermissions = request.user.apiPermissions
 
-      const hasAllPermissions = requiredApiPermissions.every(permission => userApiPermissions.includes(permission))
+      const hasAllPermissions = requiredApiPermissions.every((permission) =>
+        userApiPermissions.includes(permission)
+      )
 
       if (!hasAllPermissions) {
         throw new ForbiddenException(this.i18n.t('common.noPermission'))
       }
 
       return true
-    }
-    catch (error) {
+    } catch (error) {
       if (error instanceof UnauthorizedException) {
         throw new UnauthorizedException(this.i18n.t('common.accessTokenOnly'))
       }
