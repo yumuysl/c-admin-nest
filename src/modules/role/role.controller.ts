@@ -1,5 +1,22 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UseInterceptors, UsePipes } from '@nestjs/common'
-import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  Query,
+  UseInterceptors,
+  UsePipes,
+} from '@nestjs/common'
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger'
 
 import { DeleteManyDto } from '@/common/dto'
 import { ROLE } from '@/constants/permissions'
@@ -12,7 +29,7 @@ import { RoleListDto } from './dto/role-list.dto'
 import { UpdateRoleDto } from './dto/update-role.dto'
 import { RoleService } from './role.service'
 
-@Controller('role')
+@Controller('v1/roles')
 @ApiTags('角色管理模块')
 export class RoleController {
   private static readonly CACHE_TTL = 60 * 60 * 1
@@ -81,7 +98,10 @@ export class RoleController {
   @ApiBearerAuth()
   @ApiOperation({ summary: '更新角色' })
   @ApiOkResponse({ description: '更新角色成功' })
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateRoleDto: UpdateRoleDto) {
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateRoleDto: UpdateRoleDto
+  ) {
     return this.roleService.update(id, updateRoleDto)
   }
 

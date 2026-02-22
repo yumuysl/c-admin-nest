@@ -18,7 +18,13 @@ import {
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import { AuthGuard } from '@nestjs/passport'
-import { ApiBearerAuth, ApiBody, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 import { Request } from 'express'
 
 import { DeleteManyDto } from '@/common/dto'
@@ -44,7 +50,7 @@ import { UpdateUserDto } from './dto/update-user.dto'
 import { UserListDto } from './dto/user-list.dto'
 import { UserService } from './user.service'
 
-@Controller('user')
+@Controller('v1/users')
 @ApiTags('用户管理模块')
 export class UserController {
   private static readonly CACHE_TTL = 60 * 60 * 1
@@ -52,7 +58,7 @@ export class UserController {
   constructor(
     private readonly userService: UserService,
     private readonly configService: ConfigService,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService
   ) {}
 
   @Public()
@@ -66,7 +72,7 @@ export class UserController {
       },
       {
         expiresIn: this.configService.get('JWT_ACCESS_EXPIRES') || '30m',
-      },
+      }
     )
 
     const refreshToken = this.jwtService.sign(
@@ -76,7 +82,7 @@ export class UserController {
       },
       {
         expiresIn: this.configService.get('JWT_REFRESH_EXPIRES') || '7d',
-      },
+      }
     )
 
     return {
@@ -115,7 +121,7 @@ export class UserController {
         },
         {
           expiresIn: this.configService.get('JWT_ACCESS_EXPIRES') || '30m',
-        },
+        }
       )
 
       const signedRefreshToken = this.jwtService.sign(
@@ -125,15 +131,14 @@ export class UserController {
         },
         {
           expiresIn: this.configService.get('JWT_REFRESH_EXPIRES') || '7d',
-        },
+        }
       )
 
       return {
         accessToken: signedAccessToken,
         refreshToken: signedRefreshToken,
       }
-    }
-    catch {
+    } catch {
       throw new UnauthorizedException('token 已失效，请重新登录')
     }
   }
@@ -156,7 +161,10 @@ export class UserController {
   @ApiBody({
     type: UpdateUserPasswordDto,
   })
-  async updatePassword(@UserInfo('id') id: number, @Body() updateUserPasswordDto: UpdateUserPasswordDto) {
+  async updatePassword(
+    @UserInfo('id') id: number,
+    @Body() updateUserPasswordDto: UpdateUserPasswordDto
+  ) {
     return this.userService.updatePassword(id, updateUserPasswordDto)
   }
 
@@ -200,21 +208,24 @@ export class UserController {
   @Put(':id')
   @Permissions(USER.UPDATE)
   @CacheInvalidate('user:list')
-  @CacheInvalidateUser('user:info', req => req.params.id)
+  @CacheInvalidateUser('user:info', (req) => req.params.id)
   @UseInterceptors(CacheInterceptor)
   @UsePipes(updateValidationPipe)
   @ApiBearerAuth()
   @ApiBody({
     type: UpdateUserDto,
   })
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateUserDto: UpdateUserDto) {
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateUserDto: UpdateUserDto
+  ) {
     return this.userService.update(id, updateUserDto)
   }
 
   @Delete(':id')
   @Permissions(USER.DELETE)
   @CacheInvalidate('user:list')
-  @CacheInvalidateUser('user:info', req => req.params.id)
+  @CacheInvalidateUser('user:info', (req) => req.params.id)
   @UseInterceptors(CacheInterceptor)
   @ApiBearerAuth()
   async delete(@Param('id', ParseIntPipe) id: number) {

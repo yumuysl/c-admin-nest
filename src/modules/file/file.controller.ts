@@ -37,7 +37,7 @@ import { FileType } from 'prisma/generated/prisma'
 import { FileService } from './file.service'
 import { CreateFileDto } from './dto/create-file-dto'
 
-@Controller('file')
+@Controller('v1/files')
 @ApiTags('文件管理模板')
 export class FileController {
   private static readonly CACHE_TTL = 60 * 60 * 1

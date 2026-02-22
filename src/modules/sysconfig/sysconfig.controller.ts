@@ -15,7 +15,7 @@ import { SysconfigService } from './sysconfig.service'
 import { CreateSysconfigDto } from './dto/create-sysconfig.dto'
 import { UpdateSysconfigDto } from './dto/update-sysconfig.dto'
 
-@Controller('sysconfig')
+@Controller('v1/sysconfig')
 @ApiTags('系统配置管理模块')
 export class SysconfigController {
   constructor(private readonly sysconfigService: SysconfigService) {}

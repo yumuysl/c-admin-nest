@@ -8,7 +8,7 @@ export class SysconfigService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getSysconfigInfo() {
-    return this.prisma.sysconfig.findMany()
+    return this.prisma.sysconfig.findFirst()
   }
 
   async createSysconfigData(data: CreateSysconfigDto) {

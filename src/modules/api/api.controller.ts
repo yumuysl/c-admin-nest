@@ -1,5 +1,21 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseInterceptors, UsePipes } from '@nestjs/common'
-import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseInterceptors,
+  UsePipes,
+} from '@nestjs/common'
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger'
 
 import { API } from '@/constants/permissions'
 import { CacheInvalidate, CacheKey, CacheTTL, Permissions } from '@/decorators'
@@ -10,7 +26,7 @@ import { ApiService } from './api.service'
 import { CreateApiDto } from './dto/create-api.dto'
 import { UpdateApiDto } from './dto/update-api.dto'
 
-@Controller('api')
+@Controller('v1/apis')
 @ApiTags('接口管理模块')
 export class ApiController {
   private static readonly CACHE_TTL = 60 * 60 * 1
@@ -88,7 +104,10 @@ export class ApiController {
   @ApiOkResponse({
     description: '更新接口成功',
   })
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateApiDto: UpdateApiDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateApiDto: UpdateApiDto
+  ) {
     return this.apiService.update(id, updateApiDto)
   }
 

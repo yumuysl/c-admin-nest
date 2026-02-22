@@ -28,7 +28,7 @@ import { CreateMenuDto } from './dto/create-menu.dto'
 import { UpdateMenuDto } from './dto/update-menu.dto'
 import { MenuService } from './menu.service'
 
-@Controller('menu')
+@Controller('v1/menus')
 @ApiTags('菜单管理模块')
 export class MenuController {
   private static readonly CACHE_TTL = 60 * 60 * 1
