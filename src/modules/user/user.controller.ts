@@ -49,6 +49,7 @@ import { UpdateUserPasswordDto } from './dto/update-user-password.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UserListDto } from './dto/user-list.dto'
 import { UserService } from './user.service'
+import { LoginUserDto } from './dto/login-user.dto'
 
 @Controller('v1/users')
 @ApiTags('用户管理模块')
@@ -64,6 +65,7 @@ export class UserController {
   @Public()
   @Post('login')
   @UseGuards(AuthGuard('local'))
+  @ApiBody({ type: LoginUserDto })
   async login(@Req() req: Request) {
     const accessToken = this.jwtService.sign(
       {

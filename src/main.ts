@@ -31,8 +31,8 @@ async function bootstrap() {
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER))
 
   const config = new DocumentBuilder()
-    .setTitle('Web Crawler')
-    .setDescription('api 接口文档')
+    .setTitle('C-Admin后台管理系统Open Api接口')
+    .setDescription('api 接口文档汇总')
     .setVersion('1.0')
     .addBearerAuth({
       type: 'http',

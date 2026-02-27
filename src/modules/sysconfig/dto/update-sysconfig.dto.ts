@@ -4,15 +4,7 @@ import { i18nValidationMessage } from 'nestjs-i18n'
 
 export class UpdateSysconfigDto {
   @ApiProperty()
-  @IsNumber(
-    {},
-    {
-      message: i18nValidationMessage('validation.errorType', {
-        field: 'fileUploadMax',
-        type: 'number',
-      }),
-    }
-  )
+  @IsNumber()
   fileUploadMax?: number
 
   @ApiProperty()
