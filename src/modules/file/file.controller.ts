@@ -35,7 +35,7 @@ import { Request } from 'express'
 import { DeleteManyDto } from '@/common/dto'
 import { FileType } from 'prisma/generated/prisma'
 import { FileService } from './file.service'
-import { CreateFileDto } from './dto/create-file-dto'
+import { CreateFileDto } from './dto/create-file.dto'
 
 @Controller('v1/files')
 @ApiTags('文件管理模板')

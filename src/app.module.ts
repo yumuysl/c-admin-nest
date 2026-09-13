@@ -35,6 +35,7 @@ import { RoleModule } from '@/modules/role/role.module'
 import { UserModule } from '@/modules/user/user.module'
 import { FileModule } from './modules/file/file.module'
 import { SysconfigModule } from './modules/sysconfig/sysconfig.module'
+import { CompanyModule } from './modules/company/company.module'
 import { createLoggerOptions, defaultLogFormat, getEnvPath } from '@/utils'
 
 import { AppController } from './app.controller'
@@ -168,6 +169,7 @@ const envFilePath = getEnvPath(__dirname)
     ApiModule,
     FileModule,
     SysconfigModule,
+    CompanyModule,
   ],
   controllers: [AppController],
   providers: [

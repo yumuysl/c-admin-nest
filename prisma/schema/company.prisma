@@ -1,0 +1,11 @@
+model Company {
+  id           Int        @id @default(autoincrement())
+  name         String     @unique @db.VarChar(50)
+  parentId     Int?       @map("parent_id")
+  createAt     DateTime   @default(now())
+  updateAt     DateTime   @default(now())
+  parent       Company?    @relation("CompanyHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children     Company[]  @relation("CompanyHierarchy")
+
+  @@map("company")
+}

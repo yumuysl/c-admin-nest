@@ -139,6 +139,14 @@ exports.Prisma.RelationLoadStrategy = {
   join: 'join'
 };
 
+exports.Prisma.CompanyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  parentId: 'parentId',
+  createAt: 'createAt',
+  updateAt: 'updateAt'
+};
+
 exports.Prisma.FileScalarFieldEnum = {
   id: 'id',
   fileType: 'fileType',
@@ -250,6 +258,7 @@ exports.MenuType = exports.$Enums.MenuType = {
 
 exports.Prisma.ModelName = {
   Api: 'Api',
+  Company: 'Company',
   File: 'File',
   Menu: 'Menu',
   Role: 'Role',

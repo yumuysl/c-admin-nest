@@ -8,6 +8,7 @@ import {
   MenuType,
   FileType,
   Sysconfig,
+  Company,
 } from '../../../prisma/generated/prisma'
 
 export {
@@ -20,4 +21,5 @@ export {
   MenuType,
   FileType,
   Sysconfig,
+  Company,
 }

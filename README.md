@@ -31,6 +31,10 @@
 - [ ] 监控风控
 - [ ] 地图定位
 
+## OpenAPI文档
+
+-
+
 ## 附：Pure Admin NestJS的相关版本
 
 - **后端 `NestJS` 版本:**
